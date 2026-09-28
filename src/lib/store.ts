@@ -21,3 +21,8 @@ export function formatPrice(cents: number) {
     currency: "BRL",
   });
 }
+
+/** Link de WhatsApp para um telefone de cliente (ex.: +5551999998888). */
+export function whatsappLinkTo(phone: string) {
+  return `https://wa.me/${phone.replace(/\D/g, "")}`;
+}

@@ -11,6 +11,14 @@ export const orderStatusLabel: Record<OrderStatus, string> = {
   CANCELED: "Cancelado",
 };
 
+export const orderStatusClass: Record<OrderStatus, string> = {
+  PENDING: "bg-stone-100 text-stone-600",
+  AWAITING_PAYMENT: "bg-amber-100 text-amber-800",
+  PAID: "bg-green-100 text-green-800",
+  FAILED: "bg-red-100 text-red-700",
+  CANCELED: "bg-stone-200 text-stone-600",
+};
+
 function customField(session: Stripe.Checkout.Session, key: string) {
   return session.custom_fields?.find((f) => f.key === key)?.text?.value ?? null;
 }
@@ -51,5 +59,16 @@ export async function syncOrderFromSession(sessionId: string, status: OrderStatu
     where: { id: orderId, status: { not: "PAID" } },
     data,
   });
-  return status === "PAID" && result.count === 1;
+  const justPaid = status === "PAID" && result.count === 1;
+  if (justPaid) await decrementStock(orderId);
+  return justPaid;
+}
+
+// Baixa o estoque dos produtos vendidos, sem deixar ficar negativo
+// (cestas feitas por encomenda podem ser vendidas com estoque 0).
+async function decrementStock(orderId: string) {
+  const items = await prisma.orderItem.findMany({ where: { orderId } });
+  for (const item of items) {
+    await prisma.$executeRaw`UPDATE "Product" SET stock = GREATEST(stock - ${item.quantity}, 0) WHERE id = ${item.productId}`;
+  }
 }

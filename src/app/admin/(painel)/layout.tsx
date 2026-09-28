@@ -13,6 +13,7 @@ export default async function PainelLayout({ children }: { children: React.React
         <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
           <Link href="/admin" className="font-semibold">Painel Afetto</Link>
           <nav className="flex gap-4 text-sm">
+            <Link href="/admin/pedidos" className="hover:underline">Pedidos</Link>
             <Link href="/admin" className="hover:underline">Produtos</Link>
             <Link href="/admin/categorias" className="hover:underline">Categorias</Link>
             <Link href="/" target="_blank" className="hover:underline">Ver loja ↗</Link>
