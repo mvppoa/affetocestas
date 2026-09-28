@@ -1,0 +1,46 @@
+// Pedidos pagos pela loja (Stripe Checkout).
+
+enum OrderStatus {
+  PENDING          // Checkout criado, cliente ainda não concluiu
+  AWAITING_PAYMENT // Pix gerado, aguardando pagamento
+  PAID
+  FAILED           // Pix expirou ou pagamento recusado
+  CANCELED         // Checkout expirou sem pagamento
+}
+
+model Order {
+  id                    String      @id @default(cuid())
+  number                Int         @unique @default(autoincrement())
+  status                OrderStatus @default(PENDING)
+  totalCents            Int
+  stripeSessionId       String?     @unique
+  stripePaymentIntentId String?
+  paymentMethod         String?
+
+  customerName  String?
+  customerEmail String?
+  customerPhone String?
+  shippingName  String?
+  /// Endereço de entrega como veio do Stripe (line1, line2, city, state, postal_code, country)
+  shippingAddress Json?
+  deliveryDate    String?
+  giftMessage     String?
+
+  items     OrderItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  paidAt    DateTime?
+
+  @@index([status, createdAt])
+}
+
+model OrderItem {
+  id             String @id @default(cuid())
+  orderId        String
+  order          Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  /// Id do produto no catálogo; nome e preço ficam copiados para o pedido não mudar se o produto mudar
+  productId      String
+  name           String
+  unitPriceCents Int
+  quantity       Int
+}
