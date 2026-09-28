@@ -1,0 +1,107 @@
+[
+  {
+    "id": "p1", "slug": "cesta-bom-dia-afetto", "name": "Cesta Bom Dia Afetto",
+    "description": "Um café da manhã completo e caprichado, montado na hora com pães fresquinhos, frutas da estação e aquele toque de carinho que só a Afetto tem.",
+    "price": 18990, "categories": ["cafe-da-manha", "pronta-entrega", "aniversario"],
+    "items": ["Pão de fermentação natural", "Croissant", "Suco natural 300 ml", "Frutas da estação", "Geleia artesanal", "Queijo e presunto", "Bolo caseiro fatiado", "Cartão personalizado"],
+    "featured": true, "active": true
+  },
+  {
+    "id": "p2", "slug": "cesta-cafe-colonial", "name": "Cesta Café Colonial",
+    "description": "Inspirada nos cafés coloniais da serra gaúcha, com cuca, salame, queijo colonial e muitas delícias para começar o dia sem pressa.",
+    "price": 26990, "categories": ["cafe-da-manha", "datas-comemorativas"],
+    "items": ["Cuca de uva", "Queijo colonial", "Salame", "Pão caseiro", "Chimia", "Manteiga", "Café moído 250 g", "Suco de uva integral", "Cartão personalizado"],
+    "featured": true, "active": true
+  },
+  {
+    "id": "p3", "slug": "cesta-feliz-aniversario", "name": "Cesta Feliz Aniversário",
+    "description": "Doces, espumante e um balão de parabéns para transformar o aniversário em uma surpresa que ninguém esquece.",
+    "price": 21990, "categories": ["aniversario", "pronta-entrega"],
+    "items": ["Espumante 750 ml", "Brownies artesanais", "Chocolates finos", "Mini bolo", "Balão metalizado", "Cartão personalizado"],
+    "featured": true, "active": true
+  },
+  {
+    "id": "p4", "slug": "tabua-de-frios-classica", "name": "Tábua de Frios Clássica",
+    "description": "Tábua de madeira com uma seleção de queijos, embutidos, frutas e castanhas. Serve bem de 4 a 6 pessoas.",
+    "price": 23990, "categories": ["tabuas", "pronta-entrega", "corporativo"],
+    "items": ["Queijo brie", "Queijo gouda", "Parmesão", "Salame italiano", "Presunto parma", "Uvas e morangos", "Castanhas e damascos", "Torradas e grissini", "Tábua de madeira (fica de presente)"],
+    "featured": true, "active": true
+  },
+  {
+    "id": "p5", "slug": "tabua-romantica-para-dois", "name": "Tábua Romântica para Dois",
+    "description": "Uma tábua pensada para um encontro a dois, com vinho, queijos, chocolates e morangos.",
+    "price": 27990, "categories": ["tabuas", "datas-comemorativas", "casamento"],
+    "items": ["Vinho tinto 750 ml", "Duas taças", "Queijos selecionados", "Morangos com chocolate", "Bombons", "Torradas"],
+    "featured": true, "active": true
+  },
+  {
+    "id": "p6", "slug": "cesta-bem-vindo-bebe", "name": "Cesta Bem-vindo Bebê",
+    "description": "Um mimo delicado para receber o bebê, com itens para a mamãe se cuidar nos primeiros dias.",
+    "price": 24990, "categories": ["maternidade"],
+    "items": ["Manta de algodão", "Naninha", "Chá calmante", "Cookies integrais", "Hidratante para a mamãe", "Cartão personalizado"],
+    "featured": true, "active": true
+  },
+  {
+    "id": "p7", "slug": "cesta-mamae-merece", "name": "Cesta Mamãe Merece",
+    "description": "Café da manhã leve e nutritivo para a nova mamãe, com frutas, granola e sucos naturais.",
+    "price": 19990, "categories": ["maternidade", "cafe-da-manha"],
+    "items": ["Iogurte natural", "Granola artesanal", "Frutas da estação", "Suco verde", "Pão integral", "Mel", "Cartão personalizado"],
+    "active": true
+  },
+  {
+    "id": "p8", "slug": "cesta-brinde-aos-noivos", "name": "Cesta Brinde aos Noivos",
+    "description": "Espumante, taças gravadas e petiscos finos para os noivos celebrarem juntos.",
+    "price": 32990, "categories": ["casamento"],
+    "items": ["Espumante brut 750 ml", "Duas taças", "Queijos finos", "Chocolates", "Macarons", "Cartão personalizado"],
+    "active": true
+  },
+  {
+    "id": "p9", "slug": "kit-corporativo-gratidao", "name": "Kit Corporativo Gratidão",
+    "description": "Presente elegante para clientes e equipes, com opção de personalizar com o logo da sua empresa.",
+    "price": 15990, "categories": ["corporativo", "datas-comemorativas"],
+    "items": ["Café especial 250 g", "Caneca", "Cookies artesanais", "Chocolate", "Cartão com a marca da empresa"],
+    "active": true
+  },
+  {
+    "id": "p10", "slug": "cesta-dia-das-maes", "name": "Cesta Dia das Mães",
+    "description": "Café da manhã com flores, doces e carinho para agradecer a quem sempre cuidou de você.",
+    "price": 22990, "categories": ["datas-comemorativas", "cafe-da-manha"],
+    "items": ["Mini buquê de flores", "Pães e croissant", "Frutas", "Suco natural", "Bolo caseiro", "Chocolate", "Cartão personalizado"],
+    "active": true
+  },
+  {
+    "id": "p11", "slug": "cesta-de-pascoa", "name": "Cesta de Páscoa",
+    "description": "Ovos artesanais, coelhinhos de chocolate e doces para adoçar a Páscoa da família.",
+    "price": 17990, "categories": ["datas-comemorativas"],
+    "items": ["Ovo de chocolate artesanal", "Coelhinho de chocolate", "Bombons", "Cookies", "Cartão personalizado"],
+    "active": true
+  },
+  {
+    "id": "p12", "slug": "tabua-petiscos-happy-hour", "name": "Tábua Petiscos Happy Hour",
+    "description": "Petiscos variados e cervejas artesanais para um happy hour em casa ou no escritório.",
+    "price": 21990, "categories": ["tabuas", "corporativo", "aniversario"],
+    "items": ["Cervejas artesanais (3 un.)", "Amendoim temperado", "Salame", "Queijo provolone", "Azeitonas", "Pão de alho"],
+    "active": true
+  },
+  {
+    "id": "p13", "slug": "balao-metalizado", "name": "Balão Metalizado",
+    "description": "Balão metalizado com gás hélio para completar a surpresa.",
+    "price": 3990, "categories": ["adicionais"],
+    "items": ["Balão metalizado 45 cm com gás hélio"],
+    "active": true
+  },
+  {
+    "id": "p14", "slug": "mini-buque-de-flores", "name": "Mini Buquê de Flores",
+    "description": "Flores do dia arranjadas em um mini buquê delicado.",
+    "price": 5990, "categories": ["adicionais"],
+    "items": ["Mini buquê com flores da estação"],
+    "active": true
+  },
+  {
+    "id": "p15", "slug": "espumante-extra", "name": "Espumante Extra",
+    "description": "Espumante brut nacional para brindar junto com a cesta.",
+    "price": 6990, "categories": ["adicionais"],
+    "items": ["Espumante brut 750 ml"],
+    "active": true
+  }
+]

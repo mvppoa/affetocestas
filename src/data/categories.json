@@ -1,0 +1,11 @@
+[
+  { "slug": "pronta-entrega", "name": "Pronta Entrega", "description": "Cestas prontas para enviar hoje mesmo.", "color": "#c8745a", "emoji": "🚚" },
+  { "slug": "aniversario", "name": "Aniversário", "description": "Presentes para celebrar mais um ano de vida.", "color": "#d99a4e", "emoji": "🎂" },
+  { "slug": "cafe-da-manha", "name": "Café da Manhã", "description": "Um bom dia inesquecível, entregue na porta.", "color": "#b5835a", "emoji": "☕" },
+  { "slug": "maternidade", "name": "Maternidade", "description": "Mimos para receber o bebê e a mamãe.", "color": "#c9a3a8", "emoji": "🍼" },
+  { "slug": "casamento", "name": "Casamento", "description": "Para brindar o amor e a nova família.", "color": "#a9927a", "emoji": "💍" },
+  { "slug": "corporativo", "name": "Corporativo", "description": "Presentes para clientes, parceiros e equipes.", "color": "#6f7f6a", "emoji": "💼" },
+  { "slug": "datas-comemorativas", "name": "Datas Comemorativas", "description": "Dia das Mães, Pais, Namorados, Páscoa e Natal.", "color": "#b0584a", "emoji": "🎁" },
+  { "slug": "tabuas", "name": "Tábuas", "description": "Tábuas de frios e petiscos para compartilhar.", "color": "#8a6a4a", "emoji": "🧀" },
+  { "slug": "adicionais", "name": "Adicionais", "description": "Balões, flores, cartões e mimos extras.", "color": "#9a8fb0", "emoji": "🎈" }
+]
