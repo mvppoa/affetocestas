@@ -1,36 +1,73 @@
-import categoriesData from "@/data/categories.json";
-import productsData from "@/data/products.json";
+import type { Prisma } from "@prisma/client";
+import { prisma } from "@/lib/db";
 import type { Category, Product } from "./types";
 
-// Fonte de dados do catálogo. Hoje lê de arquivos JSON em src/data;
-// o painel de admin pode trocar estas funções por um banco de dados
-// sem mudar as páginas, que só usam as funções abaixo.
+// Fonte de dados do catálogo: banco Postgres (via Prisma), editado pelo
+// painel em /admin. As páginas só usam as funções abaixo.
 
-const categories = categoriesData as Category[];
-const products = productsData as Product[];
+const productInclude = { categories: { select: { slug: true } } } satisfies Prisma.ProductInclude;
+type ProductRow = Prisma.ProductGetPayload<{ include: typeof productInclude }>;
+
+function toProduct(p: ProductRow): Product {
+  return {
+    id: p.id,
+    slug: p.slug,
+    name: p.name,
+    description: p.description,
+    price: p.priceCents,
+    compareAtPrice: p.compareAtCents ?? undefined,
+    categories: p.categories.map((c) => c.slug),
+    items: p.items,
+    image: p.images[0],
+    images: p.images,
+    badges: p.badges,
+    stock: p.stock,
+    featured: p.featured,
+    active: p.active,
+  };
+}
+
+const productOrder = [{ featured: "desc" }, { createdAt: "desc" }] satisfies Prisma.ProductOrderByWithRelationInput[];
 
 export async function getCategories(): Promise<Category[]> {
-  return categories;
+  const rows = await prisma.category.findMany({ orderBy: [{ sortOrder: "asc" }, { name: "asc" }] });
+  return rows.map(({ slug, name, description, color, emoji }) => ({ slug, name, description, color, emoji }));
 }
 
 export async function getCategory(slug: string): Promise<Category | undefined> {
-  return categories.find((c) => c.slug === slug);
+  return (await getCategories()).find((c) => c.slug === slug);
 }
 
 export async function getProducts(): Promise<Product[]> {
-  return products.filter((p) => p.active !== false);
+  const rows = await prisma.product.findMany({
+    where: { active: true },
+    include: productInclude,
+    orderBy: productOrder,
+  });
+  return rows.map(toProduct);
 }
 
 export async function getProduct(slug: string): Promise<Product | undefined> {
-  return (await getProducts()).find((p) => p.slug === slug);
+  const row = await prisma.product.findFirst({ where: { slug, active: true }, include: productInclude });
+  return row ? toProduct(row) : undefined;
 }
 
 export async function getProductsByCategory(slug: string): Promise<Product[]> {
-  return (await getProducts()).filter((p) => p.categories.includes(slug));
+  const rows = await prisma.product.findMany({
+    where: { active: true, categories: { some: { slug } } },
+    include: productInclude,
+    orderBy: productOrder,
+  });
+  return rows.map(toProduct);
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
-  return (await getProducts()).filter((p) => p.featured);
+  const rows = await prisma.product.findMany({
+    where: { active: true, featured: true },
+    include: productInclude,
+    orderBy: productOrder,
+  });
+  return rows.map(toProduct);
 }
 
 export async function searchProducts(query: string): Promise<Product[]> {
