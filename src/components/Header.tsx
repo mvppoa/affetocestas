@@ -94,13 +94,13 @@ export function Header({ categories }: { categories: Category[] }) {
             <SearchIcon />
           </button>
         </form>
-        <ul className="mx-auto flex max-w-6xl flex-col px-4 py-2 lg:flex-row lg:flex-wrap lg:justify-center lg:gap-1">
+        <ul className="mx-auto flex max-w-6xl flex-col px-4 py-2 lg:flex-row lg:flex-wrap lg:justify-center">
           {categories.map((c) => (
             <li key={c.slug}>
               <Link
                 href={`/categoria/${c.slug}`}
                 onClick={() => setOpen(false)}
-                className="block rounded-full px-3 py-2 text-sm font-medium uppercase tracking-wide text-cocoa hover:bg-sand/60 hover:text-terracotta"
+                className="block rounded-full px-3 py-2 text-sm font-medium uppercase tracking-wide lg:px-2.5 lg:text-[0.8rem] text-cocoa hover:bg-sand/60 hover:text-terracotta"
               >
                 {c.name}
               </Link>

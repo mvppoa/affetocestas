@@ -19,7 +19,7 @@ export default async function Home() {
       <section className="mx-auto max-w-6xl px-4 py-8">
         <ul className="grid gap-4 text-center text-sm sm:grid-cols-3">
           <li className="rounded-2xl bg-white p-4 ring-1 ring-sand">🧺 <strong>Montadas à mão</strong> com produtos selecionados</li>
-          <li className="rounded-2xl bg-white p-4 ring-1 ring-sand">🚚 <strong>Entrega agendada</strong> na data e horário que você escolher</li>
+          <li className="rounded-2xl bg-white p-4 ring-1 ring-sand">🚚 <strong>Entrega combinada</strong> na data que você escolher</li>
           <li className="rounded-2xl bg-white p-4 ring-1 ring-sand">💌 <strong>Cartão personalizado</strong> com a sua mensagem</li>
         </ul>
       </section>
