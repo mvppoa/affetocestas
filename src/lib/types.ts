@@ -20,6 +20,13 @@ export type Product = {
   items: string[];
   /** Caminho ou URL da imagem. Sem imagem, a loja mostra uma ilustração. */
   image?: string;
+  /** Todas as fotos (a primeira é a mesma de `image`) */
+  images?: string[];
+  /** Preço "de" riscado, em centavos */
+  compareAtPrice?: number;
+  /** Selos, ex.: "Pronta entrega", "Mais vendido" */
+  badges?: string[];
+  stock?: number;
   featured?: boolean;
   active?: boolean;
 };
