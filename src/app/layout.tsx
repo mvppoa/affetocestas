@@ -4,6 +4,7 @@ import { CartProvider } from "@/components/CartProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { StoreChrome } from "@/components/StoreChrome";
 import { getCategories } from "@/lib/catalog";
 import { store } from "@/lib/store";
 import "./globals.css";
@@ -23,10 +24,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="pt-BR" className={`${lora.variable} ${nunito.variable} ${dancing.variable}`}>
       <body className="min-h-screen antialiased">
         <CartProvider>
-          <Header categories={categories} />
+          <StoreChrome>
+            <Header categories={categories} />
+          </StoreChrome>
           <main>{children}</main>
-          <Footer categories={categories} />
-          <WhatsAppFloat />
+          <StoreChrome>
+            <Footer categories={categories} />
+            <WhatsAppFloat />
+          </StoreChrome>
         </CartProvider>
       </body>
     </html>

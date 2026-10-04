@@ -6,9 +6,13 @@ Feita com Next.js 16 (App Router), TypeScript e Tailwind CSS 4.
 
 ## Rodar localmente
 
+Precisa de um banco Postgres. Copie `.env.example` para `.env` e preencha.
+
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+npm run db:migrate   # cria as tabelas
+npm run db:seed      # importa as categorias e produtos de exemplo de src/data
+npm run dev          # http://localhost:3000
 ```
 
 Para a versão de produção: `npm run build && npm start`.
@@ -16,11 +20,30 @@ Para a versão de produção: `npm run build && npm start`.
 ## Onde fica cada coisa
 
 - `src/lib/store.ts` — nome, WhatsApp, e-mail e Instagram da loja
-- `src/data/categories.json` — ocasiões do menu (pronta entrega, aniversário, café da manhã...)
-- `src/data/products.json` — produtos de exemplo (preço em centavos)
-- `src/lib/catalog.ts` — funções que as páginas usam para ler o catálogo
+- `src/app/admin` — painel de administração (produtos e categorias)
+- `prisma/schema` — tabelas do banco (`catalog.prisma`: produtos e categorias)
+- `src/data/*.json` — produtos e categorias de exemplo, usados só pelo `npm run db:seed`
+- `src/lib/catalog.ts` — funções que as páginas usam para ler o catálogo do banco
 - `src/components/CartProvider.tsx` — carrinho (salvo no navegador)
 - `src/components/CheckoutActions.tsx` — botões de finalizar pedido (hoje: WhatsApp)
 
-Produtos sem `image` mostram uma ilustração na cor da categoria. Para usar fotos, coloque o arquivo em
-`public/images/` e preencha `"image": "/images/nome-da-foto.jpg"` no produto.
+## Painel de administração
+
+Acesse `/admin` e entre com a senha de `ADMIN_PASSWORD`. No painel dá para:
+
+- cadastrar, editar, ocultar e excluir produtos (nome, descrição, itens da cesta, preço, preço "de",
+  estoque, fotos, categorias, selos como "Pronta entrega" e destaque na página inicial);
+- criar e editar as categorias e ocasiões do menu (nome, emoji, cor, descrição e ordem).
+
+As alterações aparecem na loja na hora. Produtos sem foto mostram uma ilustração na cor da categoria.
+
+## Variáveis de ambiente
+
+| Variável | Para quê |
+| --- | --- |
+| `DATABASE_URL` | Conexão com o Postgres (Neon, Supabase, Vercel Postgres...) |
+| `ADMIN_PASSWORD` | Senha de acesso ao painel `/admin` |
+| `ADMIN_SESSION_SECRET` | Texto aleatório de 32+ caracteres para assinar o login (`openssl rand -base64 32`) |
+| `BLOB_READ_WRITE_TOKEN` | Opcional. Token do Vercel Blob para enviar fotos pelo painel; sem ele, o painel aceita links de fotos |
+
+Na Vercel, o comando `vercel-build` aplica as migrações do banco antes de gerar o site.
