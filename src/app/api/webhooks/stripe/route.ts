@@ -9,7 +9,7 @@ export const runtime = "nodejs";
 // Cartão: checkout.session.completed já chega pago.
 // Pix: completed chega "unpaid" e depois vem async_payment_succeeded (ou _failed).
 export async function POST(req: NextRequest) {
-  const secret = process.env.affetocestas_STRIPE_WEBHOOK_SECRET;
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
   const signature = req.headers.get("stripe-signature");
   if (!secret || !signature) {
     return NextResponse.json({ error: "Webhook não configurado" }, { status: 400 });

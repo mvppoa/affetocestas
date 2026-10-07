@@ -47,10 +47,10 @@ As alterações aparecem na loja na hora. Produtos sem foto mostram uma ilustra�
 | `DATABASE_URL` | Conexão com o Postgres (Neon, Supabase, Vercel Postgres...) |
 | `ADMIN_PASSWORD` | Senha de acesso ao painel `/admin` |
 | `ADMIN_SESSION_SECRET` | Texto aleatório de 32+ caracteres para assinar o login (`openssl rand -base64 32`) |
-| `affetocestas_STRIPE_SECRET_KEY` | Chave secreta do Stripe (`sk_test_...` para testes) |
-| `affetocestas_STRIPE_WEBHOOK_SECRET` | Segredo do webhook do Stripe (`whsec_...`) |
-| `affetocestas_STRIPE_PAYMENT_METHODS` | Opcional. Formas de pagamento, padrão `card,pix` |
-| `affetocestas_SITE_URL` | Opcional. Endereço público do site, ex.: `https://afetto.com.br` |
+| `STRIPE_SECRET_KEY` | Chave secreta do Stripe (`sk_test_...` para testes) |
+| `STRIPE_WEBHOOK_SECRET` | Segredo do webhook do Stripe (`whsec_...`) |
+| `STRIPE_PAYMENT_METHODS` | Opcional. Formas de pagamento, padrão `card,pix` |
+| `NEXT_PUBLIC_SITE_URL` | Opcional. Endereço público do site, ex.: `https://afetto.com.br` |
 | `BLOB_READ_WRITE_TOKEN` | Opcional. Token do Vercel Blob para enviar fotos pelo painel; sem ele, o painel aceita links de fotos |
 
 Na Vercel, o comando `vercel-build` aplica as migrações do banco antes de gerar o site.
@@ -74,13 +74,13 @@ Como funciona:
 
 1. Crie a conta em https://dashboard.stripe.com e deixe o botão **Modo de teste** ligado.
 2. Em **Configurações > Formas de pagamento**, ative **Pix** (exige conta brasileira). Sem Pix, use
-   `affetocestas_STRIPE_PAYMENT_METHODS="card"`.
+   `STRIPE_PAYMENT_METHODS="card"`.
 3. Copie a **chave secreta de teste** (`sk_test_...`) de **Desenvolvedores > Chaves de API** para
-   `affetocestas_STRIPE_SECRET_KEY`, direto nas variáveis de ambiente da hospedagem. Nunca envie chaves por chat ou e-mail.
+   `STRIPE_SECRET_KEY`, direto nas variáveis de ambiente da hospedagem. Nunca envie chaves por chat ou e-mail.
 4. Em **Desenvolvedores > Webhooks**, adicione o endpoint `https://SEU-SITE/api/webhooks/stripe` com os eventos
    `checkout.session.completed`, `checkout.session.async_payment_succeeded`,
    `checkout.session.async_payment_failed` e `checkout.session.expired`. Copie o segredo (`whsec_...`) para
-   `affetocestas_STRIPE_WEBHOOK_SECRET`.
+   `STRIPE_WEBHOOK_SECRET`.
 5. Rode `npm run db:deploy` (ou faça o deploy na Vercel) para criar a tabela de pedidos.
 
 Para testar no computador, com a [Stripe CLI](https://docs.stripe.com/stripe-cli):
