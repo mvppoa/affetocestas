@@ -28,7 +28,7 @@ export default async function EditarProdutoPage({ params }: { params: Promise<{ 
       <ProductForm
         product={product}
         categories={categories}
-        uploadsEnabled={Boolean(process.env.BLOB_READ_WRITE_TOKEN)}
+        uploadsEnabled={Boolean(process.env.affetocestas_BLOB_READ_WRITE_TOKEN)}
       />
     </div>
   );

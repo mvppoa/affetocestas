@@ -162,7 +162,7 @@ export default function ProductForm({
               <input type="file" accept="image/*" multiple hidden disabled={uploading} onChange={(e) => onFiles(e.target.files)} />
             </label>
           ) : (
-            <span className="text-xs text-stone-500">Envio de arquivos desativado (falta BLOB_READ_WRITE_TOKEN). Cole o link da foto:</span>
+            <span className="text-xs text-stone-500">Envio de arquivos desativado (falta affetocestas_BLOB_READ_WRITE_TOKEN). Cole o link da foto:</span>
           )}
           <div className="flex flex-1 gap-2">
             <input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} placeholder="https://... (link de uma foto)" className="admin-input" />

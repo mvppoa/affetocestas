@@ -8,6 +8,7 @@ export async function POST(request: Request) {
     const result = await handleUpload({
       body,
       request,
+      token: process.env.affetocestas_BLOB_READ_WRITE_TOKEN,
       onBeforeGenerateToken: async () => {
         if (!(await isAdmin())) throw new Error("Não autorizado");
         return {
