@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { StoreLink, useStoreHref } from "./StoreLink";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Category } from "@/lib/types";
@@ -14,12 +14,13 @@ export function Header({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const toHref = useStoreHref();
 
   function onSearch(e: React.FormEvent) {
     e.preventDefault();
     if (!query.trim()) return;
     setOpen(false);
-    router.push(`/busca?q=${encodeURIComponent(query.trim())}`);
+    router.push(toHref(`/busca?q=${encodeURIComponent(query.trim())}`));
   }
 
   return (
@@ -70,14 +71,14 @@ export function Header({ categories }: { categories: Category[] }) {
           >
             <WhatsAppIcon className="h-5 w-5" /> Peça pelo WhatsApp
           </a>
-          <Link href="/carrinho" className="relative p-2 text-cocoa hover:text-terracotta" aria-label={`Carrinho, ${count} itens`}>
+          <StoreLink href="/carrinho" className="relative p-2 text-cocoa hover:text-terracotta" aria-label={`Carrinho, ${count} itens`}>
             <CartIcon className="h-7 w-7" />
             {ready && count > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-terracotta px-1 text-xs font-bold text-white">
                 {count}
               </span>
             )}
-          </Link>
+          </StoreLink>
         </div>
       </div>
 
@@ -97,13 +98,13 @@ export function Header({ categories }: { categories: Category[] }) {
         <ul className="mx-auto flex max-w-6xl flex-col px-4 py-2 lg:flex-row lg:flex-wrap lg:justify-center">
           {categories.map((c) => (
             <li key={c.slug}>
-              <Link
+              <StoreLink
                 href={`/categoria/${c.slug}`}
                 onClick={() => setOpen(false)}
                 className="block rounded-full px-3 py-2 text-sm font-medium uppercase tracking-wide lg:px-2.5 lg:text-[0.8rem] text-cocoa hover:bg-sand/60 hover:text-terracotta"
               >
                 {c.name}
-              </Link>
+              </StoreLink>
             </li>
           ))}
         </ul>

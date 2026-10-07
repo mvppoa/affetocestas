@@ -1,41 +1,28 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { StoreLink } from "@/components/StoreLink";
 import { ProductBuyBox } from "@/components/ProductBuyBox";
 import { ProductGrid } from "@/components/ProductCard";
 import { ProductImage } from "@/components/ProductImage";
-import { getCategory, getProduct, getProducts, getProductsByCategory } from "@/lib/catalog";
+import type { Catalog } from "@/lib/catalog-types";
 
-type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-  return (await getProducts()).map((p) => ({ slug: p.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await getProduct((await params).slug);
-  return product ? { title: product.name, description: product.description } : {};
-}
-
-export default async function ProductPage({ params }: Props) {
-  const { slug } = await params;
-  const product = await getProduct(slug);
+export async function ProductView({ catalog, slug }: { catalog: Catalog; slug: string }) {
+  const product = await catalog.getProduct(slug);
   if (!product) notFound();
 
-  const category = await getCategory(product.categories[0]);
-  const related = (await getProductsByCategory(product.categories[0]))
+  const category = await catalog.getCategory(product.categories[0]);
+  const related = (await catalog.getProductsByCategory(product.categories[0]))
     .filter((p) => p.id !== product.id)
     .slice(0, 4);
-  const extras = (await getProductsByCategory("adicionais")).filter((p) => p.id !== product.id);
+  const extras = (await catalog.getProductsByCategory("adicionais")).filter((p) => p.id !== product.id);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <nav className="mb-6 text-sm text-cocoa/60" aria-label="Você está em">
-        <Link href="/" className="hover:text-terracotta">Início</Link>
+        <StoreLink href="/" className="hover:text-terracotta">Início</StoreLink>
         {category && (
           <>
             {" / "}
-            <Link href={`/categoria/${category.slug}`} className="hover:text-terracotta">{category.name}</Link>
+            <StoreLink href={`/categoria/${category.slug}`} className="hover:text-terracotta">{category.name}</StoreLink>
           </>
         )}
         {" / "}

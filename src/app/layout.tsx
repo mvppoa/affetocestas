@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
 import { Dancing_Script, Lora, Nunito } from "next/font/google";
-import { CartProvider } from "@/components/CartProvider";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { StoreChrome } from "@/components/StoreChrome";
-import { getCategories } from "@/lib/catalog";
 import { store } from "@/lib/store";
 import "./globals.css";
 
@@ -18,22 +12,11 @@ export const metadata: Metadata = {
   description: `${store.tagline}. Cestas de café da manhã, aniversário, maternidade, tábuas de frios e presentes corporativos.`,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const categories = await getCategories();
+// O cabeçalho e o rodapé da loja ficam em (loja)/layout.tsx e preview/layout.tsx.
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${lora.variable} ${nunito.variable} ${dancing.variable}`}>
-      <body className="min-h-screen antialiased">
-        <CartProvider>
-          <StoreChrome>
-            <Header categories={categories} />
-          </StoreChrome>
-          <main>{children}</main>
-          <StoreChrome>
-            <Footer categories={categories} />
-            <WhatsAppFloat />
-          </StoreChrome>
-        </CartProvider>
-      </body>
+      <body className="min-h-screen antialiased">{children}</body>
     </html>
   );
 }

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { StoreLink } from "./StoreLink";
 import type { Category } from "@/lib/types";
 import { store, whatsappLink } from "@/lib/store";
 import { Logo } from "./Logo";
@@ -18,7 +18,7 @@ export function Footer({ categories }: { categories: Category[] }) {
           <ul className="mt-3 space-y-1 text-sm text-cream/80">
             {categories.map((c) => (
               <li key={c.slug}>
-                <Link href={`/categoria/${c.slug}`} className="hover:text-white">{c.name}</Link>
+                <StoreLink href={`/categoria/${c.slug}`} className="hover:text-white">{c.name}</StoreLink>
               </li>
             ))}
           </ul>
@@ -27,9 +27,9 @@ export function Footer({ categories }: { categories: Category[] }) {
         <div>
           <h3 className="font-serif text-lg">Institucional</h3>
           <ul className="mt-3 space-y-1 text-sm text-cream/80">
-            <li><Link href="/sobre" className="hover:text-white">Sobre a Afetto</Link></li>
-            <li><Link href="/como-comprar" className="hover:text-white">Como comprar</Link></li>
-            <li><Link href="/carrinho" className="hover:text-white">Meu carrinho</Link></li>
+            <li><StoreLink href="/sobre" className="hover:text-white">Sobre a Afetto</StoreLink></li>
+            <li><StoreLink href="/como-comprar" className="hover:text-white">Como comprar</StoreLink></li>
+            <li><StoreLink href="/carrinho" className="hover:text-white">Meu carrinho</StoreLink></li>
           </ul>
         </div>
 

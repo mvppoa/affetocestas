@@ -1,5 +1,6 @@
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
+import { matchesQuery } from "./search";
 import type { Category, Product } from "./types";
 
 // Fonte de dados do catálogo: banco Postgres (via Prisma), editado pelo
@@ -71,13 +72,5 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 }
 
 export async function searchProducts(query: string): Promise<Product[]> {
-  const q = normalize(query);
-  if (!q) return [];
-  return (await getProducts()).filter((p) =>
-    normalize(`${p.name} ${p.description} ${p.items.join(" ")}`).includes(q),
-  );
-}
-
-function normalize(s: string) {
-  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+  return (await getProducts()).filter((p) => matchesQuery(p, query));
 }

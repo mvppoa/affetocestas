@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { StoreLink } from "./StoreLink";
 import { useState } from "react";
 import type { Product } from "@/lib/types";
 import { formatPrice, whatsappLink } from "@/lib/store";
@@ -36,7 +36,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
       </button>
       {added && (
         <p className="mt-3 text-center text-sm text-sage">
-          Adicionado! <Link href="/carrinho" className="font-semibold underline">Ver carrinho</Link>
+          Adicionado! <StoreLink href="/carrinho" className="font-semibold underline">Ver carrinho</StoreLink>
         </p>
       )}
 

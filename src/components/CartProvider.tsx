@@ -26,13 +26,13 @@ type CartContextValue = {
 const STORAGE_KEY = "afetto-cart";
 const CartContext = createContext<CartContextValue | null>(null);
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
+export function CartProvider({ children, storageKey = STORAGE_KEY }: { children: React.ReactNode; storageKey?: string }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      const saved = localStorage.getItem(storageKey);
       if (saved) setItems(JSON.parse(saved));
     } catch {
       // carrinho vazio se o navegador bloquear o armazenamento
@@ -43,9 +43,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!ready) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      localStorage.setItem(storageKey, JSON.stringify(items));
     } catch {}
-  }, [items, ready]);
+  }, [items, ready, storageKey]);
 
   const add = useCallback((product: Product, quantity = 1) => {
     setItems((current) => {
