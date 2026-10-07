@@ -8,13 +8,13 @@ const COOKIE = "afetto_admin";
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 dias
 
 function secret() {
-  const s = process.env.affetocestas_ADMIN_SESSION_SECRET;
-  if (!s || s.length < 32) throw new Error("affetocestas_ADMIN_SESSION_SECRET precisa ter pelo menos 32 caracteres");
+  const s = process.env.ADMIN_SESSION_SECRET;
+  if (!s || s.length < 32) throw new Error("ADMIN_SESSION_SECRET precisa ter pelo menos 32 caracteres");
   return new TextEncoder().encode(s);
 }
 
 export function checkPassword(input: string): boolean {
-  const expected = process.env.affetocestas_ADMIN_PASSWORD;
+  const expected = process.env.ADMIN_PASSWORD;
   if (!expected) return false;
   const a = createHash("sha256").update(input).digest();
   const b = createHash("sha256").update(expected).digest();

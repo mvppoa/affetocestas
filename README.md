@@ -29,7 +29,7 @@ Para a versão de produção: `npm run build && npm start`.
 
 ## Painel de administração
 
-Acesse `/admin` e entre com a senha de `affetocestas_ADMIN_PASSWORD`. No painel dá para:
+Acesse `/admin` e entre com a senha de `ADMIN_PASSWORD`. No painel dá para:
 
 - cadastrar, editar, ocultar e excluir produtos (nome, descrição, itens da cesta, preço, preço "de",
   estoque, fotos, categorias, selos como "Pronta entrega" e destaque na página inicial);
@@ -43,8 +43,8 @@ As alterações aparecem na loja na hora. Produtos sem foto mostram uma ilustra�
 | --- | --- |
 | `affetocestas_POSTGRES_URL` | Conexão com o Postgres usada pelo site (criada pela integração Neon da Vercel) |
 | `affetocestas_POSTGRES_URL_NON_POOLING` | Conexão direta com o Postgres, usada para aplicar as migrações (também criada pelo Neon) |
-| `affetocestas_ADMIN_PASSWORD` | Senha de acesso ao painel `/admin` |
-| `affetocestas_ADMIN_SESSION_SECRET` | Texto aleatório de 32+ caracteres para assinar o login (`openssl rand -base64 32`) |
-| `affetocestas_BLOB_READ_WRITE_TOKEN` | Opcional. Token do Vercel Blob para enviar fotos pelo painel; sem ele, o painel aceita links de fotos |
+| `ADMIN_PASSWORD` | Senha de acesso ao painel `/admin` |
+| `ADMIN_SESSION_SECRET` | Texto aleatório de 32+ caracteres para assinar o login (`openssl rand -base64 32`) |
+| `BLOB_READ_WRITE_TOKEN` | Opcional. Token do Vercel Blob para enviar fotos pelo painel; sem ele, o painel aceita links de fotos |
 
-Todas as variáveis usam o prefixo `affetocestas_`, o mesmo que a integração Neon da Vercel cria. Na Vercel, o comando `vercel-build` aplica as migrações do banco antes de gerar o site.
+As variáveis do banco usam o prefixo `affetocestas_` que a integração Neon da Vercel cria. Na Vercel, o comando `vercel-build` aplica as migrações do banco antes de gerar o site.
