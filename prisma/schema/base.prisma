@@ -1,0 +1,9 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("affetocestas_POSTGRES_URL")
+  directUrl = env("affetocestas_POSTGRES_URL_NON_POOLING")
+}

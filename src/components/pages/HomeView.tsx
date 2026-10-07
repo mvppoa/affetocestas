@@ -1,15 +1,15 @@
-import Link from "next/link";
+import { StoreLink } from "@/components/StoreLink";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { ProductGrid } from "@/components/ProductCard";
-import { getCategories, getFeaturedProducts, getProductsByCategory } from "@/lib/catalog";
+import type { Catalog } from "@/lib/catalog-types";
 import { store, whatsappLink } from "@/lib/store";
 
-export default async function Home() {
+export async function HomeView({ catalog }: { catalog: Catalog }) {
   const [categories, featured, breakfast, boards] = await Promise.all([
-    getCategories(),
-    getFeaturedProducts(),
-    getProductsByCategory("cafe-da-manha"),
-    getProductsByCategory("tabuas"),
+    catalog.getCategories(),
+    catalog.getFeaturedProducts(),
+    catalog.getProductsByCategory("cafe-da-manha"),
+    catalog.getProductsByCategory("tabuas"),
   ]);
 
   return (
@@ -28,7 +28,7 @@ export default async function Home() {
         <SectionTitle title="Presentes por ocasião" />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {categories.map((c) => (
-            <Link
+            <StoreLink
               key={c.slug}
               href={`/categoria/${c.slug}`}
               className="group flex flex-col items-center rounded-2xl p-5 text-center text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
@@ -36,7 +36,7 @@ export default async function Home() {
             >
               <span className="text-4xl" aria-hidden="true">{c.emoji}</span>
               <span className="mt-2 font-serif text-lg">{c.name}</span>
-            </Link>
+            </StoreLink>
           ))}
         </div>
       </section>
@@ -81,9 +81,9 @@ function SectionTitle({ title, href }: { title: string; href?: string }) {
     <div className="mb-6 flex items-end justify-between gap-4">
       <h2 className="font-serif text-2xl sm:text-3xl">{title}</h2>
       {href && (
-        <Link href={href} className="text-sm font-semibold text-terracotta hover:underline">
+        <StoreLink href={href} className="text-sm font-semibold text-terracotta hover:underline">
           Ver todos
-        </Link>
+        </StoreLink>
       )}
     </div>
   );

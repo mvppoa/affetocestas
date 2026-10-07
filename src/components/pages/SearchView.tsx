@@ -1,14 +1,8 @@
-import type { Metadata } from "next";
 import { ProductGrid } from "@/components/ProductCard";
-import { searchProducts } from "@/lib/catalog";
+import type { Catalog } from "@/lib/catalog-types";
 
-export const metadata: Metadata = { title: "Busca" };
-
-type Props = { searchParams: Promise<{ q?: string }> };
-
-export default async function SearchPage({ searchParams }: Props) {
-  const q = (await searchParams).q ?? "";
-  const results = await searchProducts(q);
+export async function SearchView({ catalog, q }: { catalog: Catalog; q: string }) {
+  const results = await catalog.searchProducts(q);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">

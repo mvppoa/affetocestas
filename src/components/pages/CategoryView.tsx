@@ -1,25 +1,12 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { StoreLink } from "@/components/StoreLink";
 import { ProductGrid } from "@/components/ProductCard";
-import { getCategories, getCategory, getProductsByCategory } from "@/lib/catalog";
+import type { Catalog } from "@/lib/catalog-types";
 
-type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-  return (await getCategories()).map((c) => ({ slug: c.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const category = await getCategory((await params).slug);
-  return category ? { title: category.name, description: category.description } : {};
-}
-
-export default async function CategoryPage({ params }: Props) {
-  const { slug } = await params;
-  const category = await getCategory(slug);
+export async function CategoryView({ catalog, slug }: { catalog: Catalog; slug: string }) {
+  const category = await catalog.getCategory(slug);
   if (!category) notFound();
-  const products = await getProductsByCategory(slug);
+  const products = await catalog.getProductsByCategory(slug);
 
   return (
     <div>
@@ -30,7 +17,7 @@ export default async function CategoryPage({ params }: Props) {
       </div>
       <div className="mx-auto max-w-6xl px-4 py-8">
         <nav className="mb-6 text-sm text-cocoa/60" aria-label="Você está em">
-          <Link href="/" className="hover:text-terracotta">Início</Link> / <span>{category.name}</span>
+          <StoreLink href="/" className="hover:text-terracotta">Início</StoreLink> / <span>{category.name}</span>
         </nav>
         {products.length ? (
           <ProductGrid products={products} />

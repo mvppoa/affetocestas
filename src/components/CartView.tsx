@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { StoreLink } from "./StoreLink";
 import { formatPrice } from "@/lib/store";
 import { useCart } from "./CartProvider";
 import { CheckoutActions } from "./CheckoutActions";
@@ -16,9 +16,9 @@ export function CartView() {
       <div className="rounded-3xl bg-white py-16 text-center ring-1 ring-sand">
         <p className="text-5xl" aria-hidden="true">🧺</p>
         <p className="mt-4 text-lg">Seu carrinho está vazio.</p>
-        <Link href="/" className="mt-6 inline-block rounded-full bg-terracotta px-6 py-3 font-semibold text-white hover:bg-terracotta-dark">
+        <StoreLink href="/" className="mt-6 inline-block rounded-full bg-terracotta px-6 py-3 font-semibold text-white hover:bg-terracotta-dark">
           Escolher um presente
-        </Link>
+        </StoreLink>
       </div>
     );
   }
@@ -28,12 +28,12 @@ export function CartView() {
       <ul className="divide-y divide-sand rounded-2xl bg-white ring-1 ring-sand">
         {items.map((item) => (
           <li key={item.id} className="flex gap-4 p-4">
-            <Link href={`/produto/${item.slug}`} className="h-20 w-20 shrink-0 overflow-hidden rounded-xl">
+            <StoreLink href={`/produto/${item.slug}`} className="h-20 w-20 shrink-0 overflow-hidden rounded-xl">
               <ProductImage name={item.name} image={item.image} />
-            </Link>
+            </StoreLink>
             <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <Link href={`/produto/${item.slug}`} className="font-serif text-lg hover:text-terracotta">{item.name}</Link>
+                <StoreLink href={`/produto/${item.slug}`} className="font-serif text-lg hover:text-terracotta">{item.name}</StoreLink>
                 <p className="text-sm text-cocoa/70">{formatPrice(item.price)} cada</p>
               </div>
               <div className="flex items-center gap-4">
@@ -69,9 +69,9 @@ export function CartView() {
           <span className="text-terracotta">{formatPrice(subtotal)}</span>
         </div>
         <CheckoutActions />
-        <Link href="/" className="mt-4 block text-center text-sm text-cocoa/70 hover:text-terracotta">
+        <StoreLink href="/" className="mt-4 block text-center text-sm text-cocoa/70 hover:text-terracotta">
           Continuar comprando
-        </Link>
+        </StoreLink>
       </aside>
     </div>
   );

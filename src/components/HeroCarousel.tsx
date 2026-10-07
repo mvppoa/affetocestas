@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { StoreLink } from "./StoreLink";
 import { useEffect, useState } from "react";
 
 const slides = [
@@ -47,13 +47,13 @@ export function HeroCarousel() {
               <div className="max-w-lg text-white">
                 <h2 className="font-serif text-3xl sm:text-5xl">{s.title}</h2>
                 <p className="mt-4 text-lg text-white/90">{s.text}</p>
-                <Link
+                <StoreLink
                   href={s.href}
                   tabIndex={i === index ? 0 : -1}
                   className="mt-6 inline-block rounded-full bg-white px-6 py-3 font-semibold text-cocoa hover:bg-cream"
                 >
                   {s.cta}
-                </Link>
+                </StoreLink>
               </div>
               <span className="hidden text-[9rem] leading-none drop-shadow-lg sm:block" aria-hidden="true">{s.emoji}</span>
             </div>
