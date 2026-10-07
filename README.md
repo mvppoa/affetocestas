@@ -44,7 +44,8 @@ As alterações aparecem na loja na hora. Produtos sem foto mostram uma ilustra�
 
 | Variável | Para quê |
 | --- | --- |
-| `DATABASE_URL` | Conexão com o Postgres (Neon, Supabase, Vercel Postgres...) |
+| `affetocestas_POSTGRES_URL` | Conexão com o Postgres usada pelo site (criada pela integração Neon da Vercel) |
+| `affetocestas_POSTGRES_URL_NON_POOLING` | Conexão direta com o Postgres, usada para aplicar as migrações (também criada pelo Neon) |
 | `ADMIN_PASSWORD` | Senha de acesso ao painel `/admin` |
 | `ADMIN_SESSION_SECRET` | Texto aleatório de 32+ caracteres para assinar o login (`openssl rand -base64 32`) |
 | `STRIPE_SECRET_KEY` | Chave secreta do Stripe (`sk_test_...` para testes) |
@@ -53,7 +54,7 @@ As alterações aparecem na loja na hora. Produtos sem foto mostram uma ilustra�
 | `NEXT_PUBLIC_SITE_URL` | Opcional. Endereço público do site, ex.: `https://afetto.com.br` |
 | `BLOB_READ_WRITE_TOKEN` | Opcional. Token do Vercel Blob para enviar fotos pelo painel; sem ele, o painel aceita links de fotos |
 
-Na Vercel, o comando `vercel-build` aplica as migrações do banco antes de gerar o site.
+As variáveis do banco usam o prefixo `affetocestas_` que a integração Neon da Vercel cria. Na Vercel, o comando `vercel-build` aplica as migrações do banco antes de gerar o site.
 
 ## Pagamentos com Stripe
 
